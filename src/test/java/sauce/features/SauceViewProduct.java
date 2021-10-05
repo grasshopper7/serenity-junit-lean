@@ -12,6 +12,7 @@ import net.thucydides.core.annotations.Title;
 import sauce.actions.BeginAction;
 import sauce.steps.InventorySteps;
 import sauce.steps.LoginSteps;
+import sauce.steps.ProductDetailsSteps;
 
 @RunWith(SerenityRunner.class)
 public class SauceViewProduct {
@@ -28,6 +29,9 @@ public class SauceViewProduct {
 	@Steps(actor = "Mounish")
 	private InventorySteps inventorySteps;
 
+	@Steps(actor = "Mounish")
+	private ProductDetailsSteps productDetailsSteps;
+
 	@Before
 	public void openSauceSite() {
 		begin.navigateToStartPage();
@@ -41,6 +45,6 @@ public class SauceViewProduct {
 		String productPrice = "$15.99";
 
 		inventorySteps.attemptToDisplayProductDetails(productName);
-		// product.verifyProductDetails(productName, productPrice);
+		productDetailsSteps.verifyProductDetails(productName, productPrice);
 	}
 }

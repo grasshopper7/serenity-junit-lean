@@ -15,7 +15,6 @@ import sauce.steps.InventorySteps;
 import sauce.steps.LoginSteps;
 
 @RunWith(SerenityRunner.class)
-@Ignore
 public class SauceLogin {
 
 	@Managed
