@@ -78,8 +78,6 @@
 						<include>**/*Test.java</include>
 						<include>**/Test*.java</include>
 						<include>**/*TestSuite.java</include>
-						<!-- <include>**/When*.java</include> -->
-						<include>**/Open*.java</include>
 						<include>sauce/**/*.java</include>
 					</includes>
 					<systemPropertyVariables>

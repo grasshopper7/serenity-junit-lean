@@ -1,6 +1,9 @@
 package sauce.features;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.WebDriver;
@@ -10,11 +13,12 @@ import net.thucydides.core.annotations.Managed;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
 import sauce.actions.BeginAction;
-import sauce.steps.InventorySteps;
-import sauce.steps.LoginSteps;
+import sauce.actions.InputCredentialsActionNS;
+import sauce.queries.LoginQueryNS;
 
 @RunWith(SerenityRunner.class)
-public class SauceLogin {
+@Ignore
+public class SauceLoginNS {
 
 	@Managed
 	private WebDriver driver;
@@ -23,10 +27,10 @@ public class SauceLogin {
 	private BeginAction begin;
 
 	@Steps(actor = "Mounish")
-	private LoginSteps login;
+	private InputCredentialsActionNS inputCredentialsActionNS;
 
 	@Steps(actor = "Mounish")
-	private InventorySteps inventory;
+	private LoginQueryNS loginQueryNS;
 
 	@Before
 	public void openSauceSite() {
@@ -34,16 +38,11 @@ public class SauceLogin {
 	}
 
 	@Test
-	@Title("Successful Login Test")
-	public void shouldLoginSuccesfully() {
-		login.attemptToLogin("standard_user", "secret_sauce");
-		login.verifyProductsDisplayed();
-	}
-
-	@Test
 	@Title("Failed Login Test")
 	public void shouldFailLogin() {
-		login.attemptToLogin("wrong_user", "open_sauce");
-		login.verifyLoginFailureMessage();
+
+		inputCredentialsActionNS.enterDetails("wrong_user", "open_sauce");
+		assertThat(loginQueryNS.loginInformationMessage())
+				.isEqualTo("Epic11 sadface: Username and password do not match any user in this service");
 	}
 }

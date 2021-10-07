@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import net.thucydides.core.annotations.Step;
 import sauce.actions.InputCredentialsAction;
+import sauce.queries.InventoryQuery;
 import sauce.queries.LoginQuery;
 
 public class LoginSteps {
@@ -13,6 +14,13 @@ public class LoginSteps {
 	private InputCredentialsAction inputCredentialsAction;
 
 	private LoginQuery loginQuery;
+
+	private InventoryQuery inventoryQuery;
+
+	@Step("#actor should see products displayed")
+	public void verifyProductsDisplayed() {
+		assertThat(inventoryQuery.getProductPageHeadingText()).isEqualTo("PRODUCTS");
+	}
 
 	@Step("#actor logs in with details - username '{0}' and password '{1}'")
 	public void attemptToLogin(String username, String password) {

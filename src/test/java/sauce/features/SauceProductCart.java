@@ -10,12 +10,13 @@ import net.thucydides.core.annotations.Managed;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
 import sauce.actions.BeginAction;
+import sauce.steps.CartSteps;
 import sauce.steps.InventorySteps;
 import sauce.steps.LoginSteps;
 import sauce.steps.ProductDetailsSteps;
 
 @RunWith(SerenityRunner.class)
-public class SauceViewProduct {
+public class SauceProductCart {
 
 	@Managed
 	private WebDriver driver;
@@ -32,6 +33,9 @@ public class SauceViewProduct {
 	@Steps(actor = "Mounish")
 	private ProductDetailsSteps productDetail;
 
+	@Steps(actor = "Mounish")
+	private CartSteps cart;
+
 	@Before
 	public void openSauceSite() {
 		begin.navigateToStartPage();
@@ -40,12 +44,23 @@ public class SauceViewProduct {
 	}
 
 	@Test
-	@Title("Select Product Details")
-	public void shouldViewProductSuccesfully() {
-		String productName = "Test.allTheThings() T-Shirt (Red)";
-		String productPrice = "$15.99";
+	@Title("Add to Cart from All Products Page")
+	public void shouldAddToCartFromAllProductsSuccesfully() {
+		String productName = "Sauce Labs Backpack";
+		inventory.attemptToAddProductToCart(productName);
+		cart.verifyProductCountInCartIcon(1);
+		cart.attemptToDisplayCartDetails();
+		cart.verifyProductAvailableInCart(productName);
+	}
 
+	@Test
+	@Title("Add to Cart from Product Details Page")
+	public void shouldAddToCartFromProductDetailSuccesfully() {
+		String productName = "Sauce Labs Bike Light";
 		inventory.attemptToDisplayProductDetails(productName);
-		productDetail.verifyProductDetails(productName, productPrice);
+		productDetail.attemptToAddProductToCart(productName);
+		cart.verifyProductCountInCartIcon(1);
+		cart.attemptToDisplayCartDetails();
+		cart.verifyProductAvailableInCart(productName);
 	}
 }
