@@ -24,7 +24,7 @@ public class SauceLoginNS {
 	private WebDriver driver;
 
 	@Steps(actor = "Mounish")
-	private BeginAction begin;
+	private BeginAction beginAction;
 
 	@Steps(actor = "Mounish")
 	private InputCredentialsActionNS inputCredentialsActionNS;
@@ -34,7 +34,7 @@ public class SauceLoginNS {
 
 	@Before
 	public void openSauceSite() {
-		begin.navigateToStartPage();
+		beginAction.navigateToStartPage();
 	}
 
 	@Test

@@ -21,22 +21,22 @@ public class SauceViewProduct {
 	private WebDriver driver;
 
 	@Steps(actor = "Mounish")
-	private BeginAction begin;
+	private BeginAction beginAction;
 
 	@Steps(actor = "Mounish")
-	private LoginSteps login;
+	private LoginSteps loginSteps;
 
 	@Steps(actor = "Mounish")
-	private InventorySteps inventory;
+	private InventorySteps inventorySteps;
 
 	@Steps(actor = "Mounish")
-	private ProductDetailsSteps productDetail;
+	private ProductDetailsSteps productDetailSteps;
 
 	@Before
 	public void openSauceSite() {
-		begin.navigateToStartPage();
-		login.attemptToLogin("standard_user", "secret_sauce");
-		login.verifyProductsDisplayed();
+		beginAction.navigateToStartPage();
+		loginSteps.attemptToLogin("standard_user", "secret_sauce");
+		loginSteps.verifyProductsDisplayed();
 	}
 
 	@Test
@@ -45,7 +45,7 @@ public class SauceViewProduct {
 		String productName = "Test.allTheThings() T-Shirt (Red)";
 		String productPrice = "$15.99";
 
-		inventory.attemptToDisplayProductDetails(productName);
-		productDetail.verifyProductDetails(productName, productPrice);
+		inventorySteps.attemptToDisplayProductDetails(productName);
+		productDetailSteps.verifyProductDetails(productName, productPrice);
 	}
 }

@@ -22,32 +22,32 @@ public class SauceProductCart {
 	private WebDriver driver;
 
 	@Steps(actor = "Mounish")
-	private BeginAction begin;
+	private BeginAction beginAction;
 
 	@Steps(actor = "Mounish")
-	private LoginSteps login;
+	private LoginSteps loginSteps;
 
 	@Steps(actor = "Mounish")
-	private InventorySteps inventory;
+	private InventorySteps inventorySteps;
 
 	@Steps(actor = "Mounish")
-	private ProductDetailsSteps productDetail;
+	private ProductDetailsSteps productDetailSteps;
 
 	@Steps(actor = "Mounish")
 	private CartSteps cart;
 
 	@Before
 	public void openSauceSite() {
-		begin.navigateToStartPage();
-		login.attemptToLogin("standard_user", "secret_sauce");
-		login.verifyProductsDisplayed();
+		beginAction.navigateToStartPage();
+		loginSteps.attemptToLogin("standard_user", "secret_sauce");
+		loginSteps.verifyProductsDisplayed();
 	}
 
 	@Test
 	@Title("Add to Cart from All Products Page")
 	public void shouldAddToCartFromAllProductsSuccesfully() {
 		String productName = "Sauce Labs Backpack";
-		inventory.attemptToAddProductToCart(productName);
+		inventorySteps.attemptToAddProductToCart(productName);
 		cart.verifyProductCountInCartIcon(1);
 		cart.attemptToDisplayCartDetails();
 		cart.verifyProductAvailableInCart(productName);
@@ -57,8 +57,8 @@ public class SauceProductCart {
 	@Title("Add to Cart from Product Details Page")
 	public void shouldAddToCartFromProductDetailSuccesfully() {
 		String productName = "Sauce Labs Bike Light";
-		inventory.attemptToDisplayProductDetails(productName);
-		productDetail.attemptToAddProductToCart(productName);
+		inventorySteps.attemptToDisplayProductDetails(productName);
+		productDetailSteps.attemptToAddProductToCart(productName);
 		cart.verifyProductCountInCartIcon(1);
 		cart.attemptToDisplayCartDetails();
 		cart.verifyProductAvailableInCart(productName);

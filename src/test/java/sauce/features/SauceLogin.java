@@ -20,30 +20,30 @@ public class SauceLogin {
 	private WebDriver driver;
 
 	@Steps(actor = "Mounish")
-	private BeginAction begin;
+	private BeginAction beginAction;
 
 	@Steps(actor = "Mounish")
-	private LoginSteps login;
+	private LoginSteps loginSteps;
 
 	@Steps(actor = "Mounish")
-	private InventorySteps inventory;
+	private InventorySteps inventorySteps;
 
 	@Before
 	public void openSauceSite() {
-		begin.navigateToStartPage();
+		beginAction.navigateToStartPage();
 	}
 
 	@Test
 	@Title("Successful Login Test")
 	public void shouldLoginSuccesfully() {
-		login.attemptToLogin("standard_user", "secret_sauce");
-		login.verifyProductsDisplayed();
+		loginSteps.attemptToLogin("standard_user", "secret_sauce");
+		loginSteps.verifyProductsDisplayed();
 	}
 
 	@Test
 	@Title("Failed Login Test")
 	public void shouldFailLogin() {
-		login.attemptToLogin("wrong_user", "open_sauce");
-		login.verifyLoginFailureMessage();
+		loginSteps.attemptToLogin("wrong_user", "open_sauce");
+		loginSteps.verifyLoginFailureMessage();
 	}
 }

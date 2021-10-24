@@ -9,4 +9,6 @@ public class ProductDetailsComponent {
 
 	public static By productPrice = By
 			.xpath("//div[@id='inventory_item_container']//div[@class='inventory_details_price']");
+
+	public static By addToCartButton = By.id("add-to-cart-sauce-labs-bike-light");
 }
